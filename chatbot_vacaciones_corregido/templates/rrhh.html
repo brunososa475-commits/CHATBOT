@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración - RRHH</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f9; padding: 40px; color: #333; }
+        h1 { color: #1F4E79; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid #eef2f5; }
+        th { background: #1F4E79; color: white; font-weight: 600; }
+        tr:hover { background: #f8fafc; }
+        .badge { padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; background: #ffeeba; color: #856404; }
+        .btn { padding: 6px 14px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; margin-right: 5px; display: inline-block; }
+        .btn-aprobar { background: #28a745; color: white; }
+        .btn-aprobar:hover { background: #218838; }
+        .btn-rechazar { background: #dc3545; color: white; }
+        .btn-rechazar:hover { background: #c82333; }
+        .no-data { text-align: center; color: #777; padding: 30px; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <h1>📋 Solicitudes de Vacaciones Pendientes</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID Solicitud</th>
+                <th>Legajo Empleado</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Estado</th>
+                <th>Acciones de RRHH</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in solicitudes %}
+            <tr>
+                <td><strong>#{{ s.id }}</strong></td>
+                <td>{{ s.legajo }}</td>
+                <td>{{ s.inicio }}</td>
+                <td>{{ s.fin }}</td>
+                <td><span class="badge">{{ s.estado }}</span></td>
+                <td>
+                    <a href="/rrhh/aprobar/{{ s.id }}" class="btn btn-aprobar">✔️ Aprobar</a>
+                    <a href="/rrhh/rechazar/{{ s.id }}" class="btn btn-rechazar">❌ Rechazar</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="no-data">No hay ninguna solicitud pendiente por evaluar en este momento.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
