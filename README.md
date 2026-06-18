@@ -15,7 +15,6 @@ Este proyecto consiste en un Bot de Telegram diseñado para automatizar y gestio
 
 El proyecto tiene la siguiente estructura de directorios y archivos:
 
-```text
 CHATBOT/
 │
 ├── codigo/
@@ -130,3 +129,6 @@ Interrumpe cualquier proceso para darle posibilidad de equivocarse al usuario.
 **Comandos para Recursos Humanos:**
 *`/rrhh_notificar` : Comando de uso exclusivo para administradores.
 Escanea la base de datos en busca de solicitudes resueltas manualmente (Aprobado/Rechazado) que aún no hayan sido notificadas (Columna J = "NO") y envía el veredicto final al Telegram del empleado correspondiente, luego de ejecutar el comando.
+
+Para poder usar el sistema como un empleado de RRHH y probar este comando se puede agregar en la linea 27 del código, agregar una "," a la lista ingresando su ID de telegram.
+Se puede obtener la ID de telegram para agregar al código escribiendole al bot @userinfobot, copiar el código que aparece y pegarlo seguido de una coma en esa lista (ADMINS_RRHH).
