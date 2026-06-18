@@ -1,0 +1,4 @@
+python-telegram-bot #libreria para telegram
+gspread #libreria conexion con Google Sheets
+oauth2client #libreria de autenticación con Google Cloud
+python-dotenv #libreria para 

@@ -1,0 +1,10 @@
+# Credenciales sensibles
+credenciales.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.env
