@@ -1,6 +1,7 @@
 import logging
 import gspread
 import os
+from dotenv import load_dotenv #libreria para cargar token de telegram
 from datetime import datetime
 from oauth2client.service_account import ServiceAccountCredentials
 from telegram import Update
@@ -19,6 +20,8 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
+
+load_dotenv() #cargar variable de entorno desde archivo .env
 
 # IDs de Telegram autorizados para usar /rrhh_notificar
 ADMINS_RRHH = [7535226391]  # Agregar IDs del equipo de RRHH
@@ -401,7 +404,11 @@ async def rrhh_notificar(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 # ─── INICIALIZACIÓN DEL BOT ───────────────────────────────────────────────────
 
 if __name__ == '__main__':
-    TOKEN = "8807520548:AAGVqkL7OOAuKs1suGhs2ZK3KDmKUMmTy3Q"
+    # Ahora lee el token desde el archivo oculto
+    TOKEN = os.getenv("TELEGRAM_TOKEN")
+    
+    if not TOKEN:
+        raise ValueError("No se encontró el TELEGRAM_TOKEN. Revisá tu archivo .env")
 
     app = Application.builder().token(TOKEN).build()
 
