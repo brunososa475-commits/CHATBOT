@@ -113,7 +113,38 @@ El sistema utiliza un documento de Google Sheets como base de datos relacional, 
 │ notificado         │ Booleano: ¿Ya fue notificado el estado?                 │
 └────────────────────┴─────────────────────────────────────────────────────────┘
 
+## Esqueleto de Navegación
 
+                 [ ESTADO INICIAL: ESPERA ]
+                  /                     \
+          (Comando /vacaciones)       (Comando /rrhh_notificar)
+                /                                 \
+        [ESPERANDO_LEGAJO] 
+        [COMPUERTA EXCLUSIVA]                  ¿El usuario es ADMIN?
+          /            \                           /          \
+  (Legajo Inválido) (Legajo Válido)              (NO)         (SÍ)
+        /                \                       /              \
+  [Reintento]    [ESPERANDO_FECHA_INICIO]     Denegado  [Procesar Planilla]
+                       /          \                      |
+               (Fecha Inválida) (Fecha Válida)      Enviar Alertas
+                     /              \                    |
+               [Reintento]    [ESPERANDO_FECHA_FIN]    (FIN)
+                               [COMPUERTA EXCLUSIVA]
+                                /          \
+                        (Fecha Inválida) (Fecha Válida)
+                              /              \
+                        [Reintento]            \
+                                                [COMPUERTA EXCLUSIVA]
+                                                 (¿Hay superposición?)
+                                                       /         \
+                                                     (SÍ)        (NO)
+                                                      /             \
+                                              [Registrar como]   [Registrar como]
+                                                 PENDIENTE           APROBADO
+                                                     /                 /
+                                                   /                /
+                                            [ REVISION MANUAL /FIN DE CONVERSACIÓN ]
+                                               
 
 ## 🤖 Comandos del Bot
 
