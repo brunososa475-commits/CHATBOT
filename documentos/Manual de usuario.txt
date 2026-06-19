@@ -2,24 +2,62 @@
         MANUAL DE USUARIO - BOT DE VACACIONES
 ==================================================
 
-Este bot de Telegram permite gestionar las solicitudes de vacaciones de forma rápida y sencilla.
+Este bot de Telegram permite gestionar las solicitudes de 
+vacaciones de forma rápida y sencilla, sin necesidad de 
+intervención manual salvo en casos de excepción.
 
 1. COMANDOS PARA EMPLEADOS
 --------------------------------------------------
-* /vacaciones : Es el comando principal. Escriba esto en el chat para iniciar una nueva solicitud. El bot le pedirá paso a paso:
+* /vacaciones : Es el comando principal. Escriba esto en el 
+chat para iniciar una nueva solicitud. El bot le pedirá paso 
+a paso:
     1. Su número de Legajo.
     2. La Fecha de Inicio de sus vacaciones (formato DD/MM/AAAA).
     3. La Fecha de Fin de sus vacaciones (formato DD/MM/AAAA).
 
-* /cancel : Comando de interrupción. Si se equivoca o desea abortar la solicitud en el medio del proceso, escriba /cancel. El bot detendrá la operación inmediatamente y olvidará los datos ingresados hasta que vuelva a utilizar /vacaciones.
+* /cancel : Comando de interrupción. Si se equivoca o desea 
+abortar la solicitud en el medio del proceso, escriba /cancel. 
+El bot detendrá la operación inmediatamente y olvidará los 
+datos ingresados hasta que vuelva a utilizar /vacaciones.
 
-2. CÓMO FUNCIONA LA APROBACIÓN
+2. SI ME EQUIVOCO AL ESCRIBIR
 --------------------------------------------------
-Una vez ingresadas las fechas, el sistema evaluará la solicitud al instante:
-- Aprobación Automática: Si tiene los días suficientes y ningún compañero de su mismo sector se toma vacaciones en esas mismas fechas, el bot aprobará el trámite y descontará los días automáticamente.
-- Pendiente (Revisión de RRHH): Si sus fechas se superponen con las de otro compañero de su sector, el bot dejará el trámite "Pendiente". Recursos Humanos evaluará el caso manualmente y usted recibirá una notificación con la resolución final por este mismo medio. (La respuesta es manual, así que puede demorar).
+El bot valida cada dato antes de avanzar al siguiente paso:
+- Si el legajo no existe en la base de datos, se lo informará 
+y le pedirá que lo ingrese nuevamente.
+- Si la fecha no respeta el formato DD/MM/AAAA, o si la fecha 
+de fin es anterior a la de inicio, el bot se lo indicará y le 
+pedirá que la corrija sin perder lo que ya ingresó antes.
+- Si solicita más días de los que tiene disponibles, el bot 
+se lo informará y le pedirá una nueva fecha de inicio.
 
-3. COMANDOS EXCLUSIVOS PARA RECURSOS HUMANOS
+3. CÓMO FUNCIONA LA APROBACIÓN
 --------------------------------------------------
-* /rrhh_notificar : Este comando solo funciona para usuarios autorizados (personal de RRHH). 
-Una vez que RRHH evalúa las solicitudes pendientes directamente en la base de datos (Google Sheets) y cambia su estado a "Aprobado" o "Rechazado", debe escribir este comando en el bot. El sistema leerá la base de datos y enviará un mensaje automático a cada empleado notificándole la resolución de su trámite.
+Una vez ingresadas las fechas, el sistema evaluará la 
+solicitud al instante:
+
+- Aprobación Automática: Si tiene los días suficientes y 
+ningún compañero de su mismo sector se toma vacaciones en 
+esas mismas fechas, el bot aprobará el trámite y descontará 
+los días automáticamente.
+
+- Pendiente (Revisión de RRHH): Si sus fechas se superponen 
+con las de otro compañero de su sector, el bot dejará el 
+trámite "Pendiente". Recursos Humanos evaluará el caso 
+manualmente y usted recibirá una notificación con la 
+resolución final por este mismo medio. (La respuesta es 
+manual, así que puede demorar).
+
+4. COMANDOS EXCLUSIVOS PARA RECURSOS HUMANOS
+--------------------------------------------------
+* /rrhh_notificar : Este comando solo funciona para usuarios 
+autorizados (personal de RRHH); cualquier otro usuario que lo 
+ejecute recibirá un mensaje de acceso denegado y no podrá 
+acceder a la base de datos.
+
+Una vez que RRHH evalúa las solicitudes pendientes 
+directamente en la base de datos (Google Sheets) y cambia su 
+estado a "Aprobado" o "Rechazado", debe escribir este comando 
+en el bot. El sistema leerá la base de datos y enviará un 
+mensaje automático a cada empleado notificándole la 
+resolución de su trámite, evitando notificaciones duplicadas.
